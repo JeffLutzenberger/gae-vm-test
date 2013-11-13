@@ -19,6 +19,8 @@ def f():
     x = 1.0
     for i in range(100000):
         x = x / float(i)
+        if i % 1000:
+            logging.info(x)
 
 
 class BackendTest(webapp2.RequestHandler):
@@ -34,5 +36,4 @@ class BackendTest(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/backend-test', BackendDemo), ], debug=True)
+    ('/backend-test', BackendTest), ], debug=True)
