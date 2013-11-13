@@ -1,0 +1,27 @@
+application: wf-vm-tt
+version: jeff-test
+runtime: python27
+api_version: 1
+threadsafe: true 
+
+vm: true
+
+manual_scaling:
+  instances: 1
+
+handlers:
+- url: /.*
+  script: main.app
+
+- url: /static/(.*)
+  static_files: static/\1
+  upload: static/(.*)
+
+builtins:
+- remote_api: on
+- deferred: on
+
+libraries:
+- name: jinja2
+  version: latest
+
