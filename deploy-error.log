@@ -1,0 +1,36 @@
+jefflutzenberger:~/sandbox/gae-vm-test (master)$ appcfg.py update . --version=666
+Traceback (most recent call last):
+  File "/usr/local/bin/appcfg.py", line 196, in <module>
+    run_file(__file__, globals())
+  File "/usr/local/bin/appcfg.py", line 192, in run_file
+    execfile(script_path, globals_)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 4985, in <module>
+    main(sys.argv)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 4976, in main
+    result = AppCfgApp(argv).Run()
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 2581, in Run
+    self.action(self)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 4417, in __call__
+    return method()
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 3304, in Update
+    basename=os.path.splitext(yaml_file_basename)[0])
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 2940, in _ParseAppInfoFromYaml
+    appyaml = self._ParseYamlFile(basepath, basename, appinfo_includes.Parse)
+  1 *.pyc
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/appcfg.py", line 3000, in _ParseYamlFile
+    defns = parser(fh, open_fn=self.opener)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/appinfo_includes.py", line 48, in Parse
+    appyaml, _ = ParseAndReturnIncludePaths(appinfo_file, open_fn)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/appinfo_includes.py", line 63, in ParseAndReturnIncludePaths
+    appyaml = appinfo.LoadSingleAppInfo(appinfo_file)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/appinfo.py", line 1769, in LoadSingleAppInfo
+    return NormalizeVmSettings(appyaml)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/appinfo.py", line 1312, in NormalizeVmSettings
+    appyaml.runtime = 'vm'
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/validation.py", line 360, in __setattr__
+    value = self.GetValidator(key)(value, key)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/validation.py", line 598, in __call__
+    return self.Validate(value, key)
+  File "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/api/validation.py", line 923, in Validate
+    '\'%s\'' % (value, key, self.re.pattern))
+google.appengine.api.validation.ValidationError: Value 'vm' for runtime does not match expression '^(?:go|php|python|python27|java|java7)$'
