@@ -4,10 +4,14 @@ runtime: python27
 api_version: 1
 threadsafe: true 
 
-vm: true
-
 manual_scaling:
   instances: 1
+
+vm: true
+
+vm_settings:
+ machine_type: n1-standard-1  # Default
+ vm_runtime: python27
 
 handlers:
 - url: /.*
