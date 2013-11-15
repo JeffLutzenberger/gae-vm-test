@@ -1,13 +1,8 @@
 import os
-import datetime
-import json
 import webapp2
 import jinja2
 import logging
 
-from google.appengine.ext import ndb
-from google.appengine.api import memcache
-from google.appengine.runtime import DeadlineExceededError
 from google.appengine.api import background_thread
 
 jinja_environment = jinja2.Environment(
@@ -16,11 +11,19 @@ jinja_environment = jinja2.Environment(
 
 
 def f():
-    x = 1.0
     for i in range(100000):
-        x = x / float(i)
-        if i % 1000:
+        x = 3.14159 / float(i + 1)
+        if i % 10000 == 0:
             logging.info(x)
+
+
+class MainPage(webapp2.RequestHandler):
+    """
+    Demonstrates how to use templates, we're using jinja
+    """
+    def get(self):
+        templ = jinja_environment.get_template("templates/main_page.html")
+        self.response.out.write(templ.render({'dict_key': ''}))
 
 
 class BackendTest(webapp2.RequestHandler):
@@ -28,7 +31,7 @@ class BackendTest(webapp2.RequestHandler):
     Demonstrates a really long running task (>10 min)
     """
     def get(self):
-        t = background_thread.BackgroundThread(target=f, args=None)
+        t = background_thread.BackgroundThread(target=f, args=[])
         t.start()
 
     def post(self):
@@ -36,4 +39,5 @@ class BackendTest(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
+    ('/', MainPage),
     ('/backend-test', BackendTest), ], debug=True)
